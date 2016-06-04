@@ -128,9 +128,9 @@ Rather than use the raw gyroscope data that we would get with `startGyroUpdates.
 if manager.deviceMotionAvailable {
     manager.deviceMotionUpdateInterval = 0.01
     manager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue()) {
-        [weak self] (data: CMDeviceMotion?, error: NSError?) {
+        [weak self] (data: CMDeviceMotion?, error: NSError?) in
         if let gravity = data?.gravity {
-            let rotation = atan2(data.gravity.x, data.gravity.y) - M_PI
+            let rotation = atan2(gravity.x, gravity.y) - M_PI
             self?.imageView.transform = CGAffineTransformMakeRotation(CGFloat(rotation))
         }
     }
